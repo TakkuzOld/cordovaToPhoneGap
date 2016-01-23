@@ -11,3 +11,5 @@ Script needs the Phonegap Token loaded as Enviromental Variable in order to conn
 
 `export PGToken="$yourPhonegapToken"`  
 `cdv-pgb $cordovaProjectDirectory`
+
+The script import Cordova `resources` folders into `www` so there can't be any folder with the same name inside it. You could use `www/res` if you need.
