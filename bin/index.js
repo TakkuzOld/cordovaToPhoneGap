@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict"
 
 const cdvToPgb = require('../lib/cordovaToPhonegap')
 const argv = require('yargs').argv
