@@ -2,7 +2,7 @@
   "author": "Vittorio Giovanelli",
   "license": "MIT",
   "name": "cordova-to-phonegap-build",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Creating PhoneGap Build package from Cordova project and upload it on PhoneGap Build platform",
   "bin": {
     "cdv-pgb": "bin/index.js"
@@ -10,6 +10,8 @@
   "main": "./lib/cordovaToPhonegap.js",
   "preferGlobal": true,
   "scripts": {
+    "start": "node bin/index.js",
+    "inspect": "node --inspect-brk bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
