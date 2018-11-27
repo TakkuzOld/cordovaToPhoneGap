@@ -17,7 +17,7 @@ then you can invoke it within you application
 ```
 const cdvPgb = require('cordova-to-phonegap-build')
 
-cdvPgb.uploadProject(process.cwd(), '$yourPhonegapToken', 'resources')
+cdvPgb.upload(process.cwd(), '$yourPhonegapToken', 'resources')
 ```
 
 ### Using shell command
@@ -25,7 +25,7 @@ cdvPgb.uploadProject(process.cwd(), '$yourPhonegapToken', 'resources')
 Script needs the Phonegap Token loaded as Enviromental Variable in order to connect to Phonegap Build, you can retrieve it into _Account settings_ on Phonegap Build site.
 
 `export PGToken="$yourPhonegapToken"`
-`cdv-pgb $cordovaProjectDirectory -f resources`
+`tobuild $cordovaProjectDirectory -f resources`
 
 The script creates a .zip file to upload to PhoneGap: Build with "config.xml" and the "www" folder
 
@@ -36,7 +36,10 @@ The script creates a .zip file to upload to PhoneGap: Build with "config.xml" an
 Indicate any other folder to be added to the uploaded file. Required if you use splash/icons external resources folder.
 Could be used more times as needed. folderName is relative to the project path.
 
-i.e.: `cdv-pgb --folder resources --folder fonts`
+i.e.: `tobuild --folder resources --folder fonts`
 
 ### -t/--token $yourPhonegapToken
 You could use your token as params instead of environment variable.
+
+### -l/--lookup
+Keeps process running after upload to look at the current status of the build for every platforms.
