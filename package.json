@@ -5,9 +5,10 @@
   "version": "1.1.0",
   "description": "Creating PhoneGap Build package from Cordova project and upload it on PhoneGap Build platform",
   "bin": {
-    "cdv-pgb": "bin/index.js"
+    "cdv-pgb": "bin/index.js",
+    "tobuild": "bin/index.js"
   },
-  "main": "./lib/cordovaToPhonegap.js",
+  "main": "./lib/helper.js",
   "preferGlobal": true,
   "scripts": {
     "start": "node bin/index.js",

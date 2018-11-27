@@ -2,10 +2,7 @@
 "use strict"
 
 const meow = require('meow');
-const colors = require('colors'); // Extends String.prototype to add color support
-const pgInterface = require('../lib/pgInterface');
-const fsInterface = require('../lib/fsInterface');
-const xmlInterface = require('../lib/xmlInterface');
+const helper = require('../lib/helper');
 
 const cli = meow({
   flags: {
@@ -17,24 +14,14 @@ const cli = meow({
 
 (async () => {
   try {
-    pgInterface.auth(
-      cli.flags.token ||
-      process.env.npm_package_config_pgToken ||
-      process.env.npm_config_pgToken
-    );
-    
-    const foldersToSave = (cli.flags.folder && cli.flags.folder.length) ? cli.flags.folder : []
-    const tempFolder = fsInterface.cloneProject(
+    await helper.upload(
       cli.input[0],
-      ['www', 'config.xml'].concat(foldersToSave)
-    );
-
-    // Useless because of the use of native PGB-API functionality
-    // const zipPath = await fsInterface.zipFolder(tempFolder);
-    const appId = xmlInterface.getAppId(tempFolder);
-    const response = await pgInterface.upload(appId, tempFolder);
-
-    if (cli.flags.lookup) { await pgInterface.lookup(response.id); }
+      cli.flags.folder,
+      cli.flags.token,
+      {
+        lookup: cli.flags.lookup
+      }
+    )
   } catch (err) {
     const message = err.message;
     console.error(message.red);
