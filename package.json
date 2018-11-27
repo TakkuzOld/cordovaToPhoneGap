@@ -11,20 +11,15 @@
   "preferGlobal": true,
   "scripts": {
     "start": "node bin/index.js",
-    "inspect": "node --inspect-brk bin/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "inspect": "node --inspect-brk bin/index.js"
   },
   "dependencies": {
-    "archiver": "^1.3.0",
-    "form-data": "^0.2.0",
-    "jstoxml": "~0.2.3",
-    "mime": "^1.3.4",
-    "ncp": "~2.0.0",
-    "phonegap-build-api": "1.0.0",
-    "q": "~1.4.1",
-    "rimraf": "~2.4.3",
-    "xml2js": "~0.4.9",
-    "yargs": "^8.0.1"
+    "archiver": "3.0.0",
+    "colors": "1.3.2",
+    "fast-xml-parser": "3.12.9",
+    "fs-extra": "7.0.1",
+    "meow": "5.0.0",
+    "pgb-api": "1.1.2"
   },
   "directories": {
     "lib": "lib"
