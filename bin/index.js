@@ -25,5 +25,6 @@ const cli = meow({
   } catch (err) {
     const message = err.message;
     console.error(message.red);
+    throw err;
   }
 })()
