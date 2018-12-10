@@ -39,7 +39,27 @@ Could be used more times as needed. folderName is relative to the project path.
 i.e.: `tobuild --folder resources --folder fonts`
 
 ### -t/--token $yourPhonegapToken
-You could use your token as params instead of environment variable.
+You could use your token as params instead of environment variable.  
+Token could be obtained also from NPM config.
+
+i.e.: `npm config set pgToken "$yourPhonegapToken"`
+will save it in you `~/.npmrc` and you do not need to use in your command
 
 ### -l/--lookup
 Keeps process running after upload to look at the current status of the build for every platforms.
+
+### -k/--key
+Define if you need to use keys for signing build
+
+### -n/--key-name
+Key name on Phonegap:Build.
+It could also be defined as NPM config.
+More usefull on per project base, adding a line on _.npmrc_: `pgKey=$yourKeyName`.
+
+### -a/--key-android
+### -i/--key-ios
+Password for keystore and key of the Android key and iOS certificate.
+On Android they has to be the same, to use different password you havo to access to `pgInterface.unlockKeys` method.
+It could also be retrieved from NPM config _"$keyName":android_ and _"$keyName":ios_.
+
+i.e.: `npm config set "$keyName":android "$androidKeyPassword"` and `npm config set "$keyName":ios "$iosKeyPassword"`

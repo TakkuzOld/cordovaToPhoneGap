@@ -12,7 +12,8 @@
   "preferGlobal": true,
   "scripts": {
     "start": "node bin/index.js",
-    "inspect": "node --inspect-brk bin/index.js"
+    "inspect": "node --inspect-brk bin/index.js",
+    "test": "node test.js"
   },
   "dependencies": {
     "colors": "1.3.2",
