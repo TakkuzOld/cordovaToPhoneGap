@@ -9,6 +9,7 @@ const cli = meow({
     folder: { type: 'string', alias: 'f' },
     token: { type: 'string', alias: 't' },
     lookup: { type: 'boolean', alias: 'l' },
+    download: { type: 'string', alias: 'd' },
     key: { type: 'boolean', alias: 'k' },
     keyName: { type: 'string', alias: 'n' },
     keyAndroid: { type: 'string', alias: 'a' },
@@ -33,6 +34,7 @@ const cli = meow({
       cli.flags.token,
       {
         lookup: cli.flags.lookup,
+        download: cli.flags.download,
         keys: cli.flags.key ? keys : null
       }
     )
