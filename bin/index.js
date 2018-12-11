@@ -3,27 +3,30 @@
 
 const meow = require('meow');
 const helper = require('../lib/helper');
+const helpMessage =
+`
+  Usage
+    $ tobuild <projectFolder>
+
+  Options
+    --folder, -f       Include this folder into the build;
+    --token, -t        Use a specific token to authorize in PGB;
+    --lookup, -l       Wait till all builds succeed or fail;
+    --download, -d     Download a build after it succeeds;
+    --timeout, -o      Max timeout in minutes to wait for lookup or download;
+    --path, -p         Specify a path for the downloaded build;
+    --key, -k          Use keys to certificate apps;
+    --key-name, -n     Specify names of keys to be used;
+    --key-android, -a  Password for android key and keystore;
+    --key-ios, -i      Password for ios key and keystore
+
+  Examples
+    $ tobuild /path/to/project -f resources -l
+    $ tobuild /path/to/project -f resources -k -n "App Key" -d -p "~/Downloads"
+`
 
 const cli = meow(
-  `
-    Usage
-      $ tobuild <projectFolder>
-
-    Options
-      --folder, -f       Include this folder into the build;
-      --token, -t        Use a specific token to authorize in PGB;
-      --lookup, -l       Wait till all builds succeed or fail;
-      --download, -d     Download a build after it succeeds;
-      --path, -p         Specify a path for the downloaded build;
-      --key, -k          Use keys to certificate apps;
-      --key-name, -n     Specify names of keys to be used;
-      --key-android, -a  Password for android key and keystore;
-      --key-ios, -i      Password for ios key and keystore
-
-    Examples
-      $ tobuild /path/to/project -f resources -l
-      $ tobuild /path/to/project -f resources -k -n "App Key" -d -p "~/Downloads"
-  `,
+  helpMessage,
   {
     flags: {
       folder: { type: 'string', alias: 'f' },
@@ -50,20 +53,27 @@ const cli = meow(
   };
 
   try {
-    await helper.upload(
-      cli.input[0],
-      cli.flags.folder,
-      cli.flags.token,
-      {
-        lookup: cli.flags.lookup,
-        download: cli.flags.path || cli.flags.download,
-        keys: cli.flags.key ? keys : null
-      }
-    )
+    switch (cli.input[0]) {
+
+      default:
+        await helper.upload(
+          cli.input[0],
+          cli.flags.folder,
+          cli.flags.token,
+          {
+            lookup: cli.flags.lookup,
+            download: cli.flags.path || cli.flags.download,
+            keys: cli.flags.key ? keys : null,
+            timeout: cli.flags.timeout
+          }
+        );
+    }
+
   } catch (err) {
     const message = err.message;
-    console.error(message.red);
-
-    console.log(cli.showHelp());
+    console.error()
+    console.error(message.red)
+    console.error();
+    process.exit(5);
   }
 })()

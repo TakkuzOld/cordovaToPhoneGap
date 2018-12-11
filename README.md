@@ -76,3 +76,6 @@ After a build succeed it starts to download into current folder
 
 ### -p/--path
 Defines a path where to download the build
+
+### -o/--timeout
+Specifies the max amount of minutes to wait for _download_ or _lookup_. Defaults to 10, if reached exits with an error.
