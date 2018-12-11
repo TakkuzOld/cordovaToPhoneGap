@@ -51,13 +51,33 @@ Keeps process running after upload to look at the current status of the build fo
 ### -k/--key
 Define if you need to use keys for signing build
 
+Keys options are supposed to be defined inside _package.json_ `config` prop in that form:
+```
+"config": {
+  "keys": {
+    "name": "Foo",
+    "android": {
+      "alias": "release",
+      "password": "bar",
+      "path": ["utils", "app.keystore"]
+    },
+    "ios": {
+      "password": "bar",
+      "path": ["utils", "app.mobileprovisioning"],
+      "p12": ["utils", "app.p12"]
+    }
+  }
+}
+```
+
+
 ### -n/--key-name
 Key name on Phonegap:Build.
 It could also be defined as NPM config.
 More usefull on per project base, adding a line on _.npmrc_: `pgKey=$yourKeyName` or
-into `config` properties in _package.json_: `"config": { "pgKey": "$yourKeyName" }`
+into `config` properties in _package.json_: see (Key)[-k/--key]
 
-If `pgKey` is defined inside _package.json_ it takes priority even if `-k` isn't provided.
+If name is defined inside _package.json_ it takes priority even if `-k` isn't provided.
 
 ### -a/--key-android
 ### -i/--key-ios

@@ -29,6 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/Takkuz/cordovaToPhoneGap.git"
   },
+  
   "keywords": [
     "cordova",
     "pgb",
