@@ -54,15 +54,22 @@ Define if you need to use keys for signing build
 ### -n/--key-name
 Key name on Phonegap:Build.
 It could also be defined as NPM config.
-More usefull on per project base, adding a line on _.npmrc_: `pgKey=$yourKeyName`.
+More usefull on per project base, adding a line on _.npmrc_: `pgKey=$yourKeyName` or
+into `config` properties in _package.json_: `"config": { "pgKey": "$yourKeyName" }`
+
+If `pgKey` is defined inside _package.json_ it takes priority even if `-k` isn't provided.
 
 ### -a/--key-android
 ### -i/--key-ios
 Password for keystore and key of the Android key and iOS certificate.
 On Android they has to be the same, to use different password you havo to access to `pgInterface.unlockKeys` method.
-It could also be retrieved from NPM config _"$keyName":android_ and _"$keyName":ios_.
+It could also be retrieved from NPM config _"$keyName":android_ and _"$keyName":ios_. or into _package.json_.
 
-i.e.: `npm config set "$keyName":android "$androidKeyPassword"` and `npm config set "$keyName":ios "$iosKeyPassword"`
+Supposing keyName is Foo and password is bar
+
+i.e.: `npm config set "Foo:android" bar` and `npm config set Foo:ios bar`
+or
+i.e.: `"config": { "Foo:android": "bar", "Foo:ios": "bar" }`
 
 ### -d/--download
 After a build succeed it starts to download into current folder
