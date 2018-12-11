@@ -63,3 +63,9 @@ On Android they has to be the same, to use different password you havo to access
 It could also be retrieved from NPM config _"$keyName":android_ and _"$keyName":ios_.
 
 i.e.: `npm config set "$keyName":android "$androidKeyPassword"` and `npm config set "$keyName":ios "$iosKeyPassword"`
+
+### -d/--download
+After a build succeed it starts to download into current folder
+
+### -p/--path
+Defines a path where to download the build
