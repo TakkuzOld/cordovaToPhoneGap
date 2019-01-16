@@ -16,13 +16,15 @@ const helpMessage =
     --timeout, -o    Max timeout in minutes to wait for lookup or download;
     --path, -p       Specify a path for the downloaded build;
 
-    --key-name       Specify names of keys to be used;
-    --key-alias      Alias for key inside Android keystore;
-    --key-android    Password for android key and keystore;
-    --key-ios        Password for ios key and keystore;
-    --key-keystore   Keystore path to upload Android key;
-    --key-mobprov    MobileProvinionig path to upload iOS key;
-    --key-p12        P12 path to upload iOS key;
+    --key-android           Name of the Android key on PGB;
+    --key-ios               Name of the iOS key on PGB;
+    --key-android-pwd, -a   Password for the Android key on PGB;
+    --key-ios-pwd, -i       Password for the iOS key on PGB;
+    --key-alias             Alias for key inside Android keystore;
+    --key-alias-pwd         Alias for key inside Android keystore;
+    --key-keystore          Keystore path to upload Android key;
+    --key-mobprov           MobileProvinionig path to upload iOS key;
+    --key-p12               P12 path to upload iOS key;
 
   Examples
     $ tobuild /path/to/project -f resources -l
@@ -38,13 +40,15 @@ const cli = meow(
       lookup: { type: 'boolean', alias: 'l' },
       download: { type: 'boolean', alias: 'd' },
       path: { type: 'string', alias: 'p' },
-      keyName: { type: 'string' },
-      keyAlias: { type: 'string' },
       keyAndroid: { type: 'string' },
       keyIos: { type: 'string' },
+      keyAndroidPwd: { type: 'string', alias: 'a' },
+      keyIosPwd: { type: 'string', alias: 'i' },
+      keyAlias: { type: 'string' },
+      keyAliasPwd: { type: 'string' },
       keyKeystore: { type: 'string' },
       keyMobprov: { type: 'string' },
-      keyP12: { type: 'string' },
+      keyP12: { type: 'string' }
     }
   }
 );
@@ -52,17 +56,17 @@ const cli = meow(
 (async () => {
   try {
     const keys = ((cli.pkg || {}).config || {}).keys || {};
-    keys.name = cli.flags.keyName || keys.name;
-    if (keys.name) {
-      keys.android = keys.android || {};
-      keys.android.alias = cli.flags.keyAlias || keys.android.alias;
-      keys.android.path = cli.flags.keyKeystore.split('/') || keys.android.path;
-      keys.android.password = cli.flags.keyAndroid || keys.android.password;
-      keys.ios = keys.ios || {};
-      // keys.ios.path = cli.flags.keyMobprov.split('/') || keys.ios.path;
-      // keys.ios.p12 = cli.flags.keyP12.split('/') || keys.ios.p12;
-      keys.ios.password = cli.flags.keyIos || keys.ios.password;
-    }
+    keys.android = keys.android || {};
+    keys.android.name = cli.flags.keyAndroid || keys.android.name; 
+    keys.android.alias = cli.flags.keyAlias || keys.android.alias;
+    keys.android.path = cli.flags.keyKeystore ? cli.flags.keyKeystore.split('/') : keys.android.path;
+    keys.android.password = cli.flags.keyAndroidPwd || keys.android.password;
+    keys.android.keyPassword = cli.flags.keyAliasPwd || keys.android.keyPassword || keys.android.password;
+    keys.ios = keys.ios || {};
+    keys.ios.name = cli.flags.keyIos || keys.ios.name;
+    keys.ios.path = cli.flags.keyMobprov ? cli.flags.keyMobprov.split('/') : keys.ios.path;
+    keys.ios.p12 = cli.flags.keyP12 ? cli.flags.keyP12.split('/') : keys.ios.p12;
+    keys.ios.password = cli.flags.keyIos || keys.ios.password;
 
     switch (cli.input[0]) {
 

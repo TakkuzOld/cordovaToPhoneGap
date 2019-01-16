@@ -48,49 +48,6 @@ will save it in you `~/.npmrc` and you do not need to use in your command
 ### -l/--lookup
 Keeps process running after upload to look at the current status of the build for every platforms.
 
-### -k/--key
-Define if you need to use keys for signing build
-
-Keys options are supposed to be defined inside _package.json_ `config` prop in that form:
-```
-"config": {
-  "keys": {
-    "name": "Foo",
-    "android": {
-      "alias": "release",
-      "password": "bar",
-      "path": ["utils", "app.keystore"]
-    },
-    "ios": {
-      "password": "bar",
-      "path": ["utils", "app.mobileprovisioning"],
-      "p12": ["utils", "app.p12"]
-    }
-  }
-}
-```
-
-
-### -n/--key-name
-Key name on Phonegap:Build.
-It could also be defined as NPM config.
-More usefull on per project base, adding a line on _.npmrc_: `pgKey=$yourKeyName` or
-into `config` properties in _package.json_: see (Key)[-k/--key]
-
-If name is defined inside _package.json_ it takes priority even if `-k` isn't provided.
-
-### -a/--key-android
-### -i/--key-ios
-Password for keystore and key of the Android key and iOS certificate.
-On Android they has to be the same, to use different password you havo to access to `pgInterface.unlockKeys` method.
-It could also be retrieved from NPM config _"$keyName":android_ and _"$keyName":ios_. or into _package.json_.
-
-Supposing keyName is Foo and password is bar
-
-i.e.: `npm config set "Foo:android" bar` and `npm config set Foo:ios bar`
-or
-i.e.: `"config": { "Foo:android": "bar", "Foo:ios": "bar" }`
-
 ### -d/--download
 After a build succeed it starts to download into current folder
 
@@ -99,3 +56,49 @@ Defines a path where to download the build
 
 ### -o/--timeout
 Specifies the max amount of minutes to wait for _download_ or _lookup_. Defaults to 10, if reached exits with an error.
+
+
+## Key Management
+
+Keys options are supposed to be defined inside _package.json_ `config` prop in that form:
+```
+"config": {
+  "keys": {
+    "android": {
+      "name": "Foo",
+      "alias": "release",
+      "keyPassword": "aliasBar",
+      "password": "keyBar",
+      "path": ["utils", "app.keystore"]
+    },
+    "ios": {
+      "name": "Faa",
+      "password": "bor",
+      "path": ["utils", "app.mobileprovisioning"],
+      "p12": ["utils", "app.p12"]
+    }
+  }
+}
+```
+
+Keys can also be defined by CLI params that override _package.json_ entries.
+
+### --key-android
+Key name of Android key on Phonegap:Build.
+It could also be defined as NPM config.
+
+### -a/--key-android-pwd
+### -i/--key-ios-pwd
+Password for keystore of the Android keystore and iOS certificate.
+
+### --key-alias
+Alias for key inside Android keystore
+
+### --key-alias-pwd
+Password for defined alias inside Android keystore.
+If not defined it will be used the same of Android keystore.
+
+### --key-keystore
+### --key-mobprov
+### --key-p12
+Paths of the corresponding file to be used to create key element if it is'n found
