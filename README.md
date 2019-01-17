@@ -66,16 +66,11 @@ Keys options are supposed to be defined inside _package.json_ `config` prop in t
   "keys": {
     "android": {
       "name": "Foo",
-      "alias": "release",
-      "keyPassword": "aliasBar",
       "password": "keyBar",
-      "path": ["utils", "app.keystore"]
     },
     "ios": {
       "name": "Faa",
       "password": "bor",
-      "path": ["utils", "app.mobileprovisioning"],
-      "p12": ["utils", "app.p12"]
     }
   }
 }
@@ -84,21 +79,10 @@ Keys options are supposed to be defined inside _package.json_ `config` prop in t
 Keys can also be defined by CLI params that override _package.json_ entries.
 
 ### --key-android
-Key name of Android key on Phonegap:Build.
+### --key-ios
+Key name of Android and ios key on Phonegap:Build.
 It could also be defined as NPM config.
 
-### -a/--key-android-pwd
-### -i/--key-ios-pwd
+### --key-android-pwd
+### --key-ios-pwd
 Password for keystore of the Android keystore and iOS certificate.
-
-### --key-alias
-Alias for key inside Android keystore
-
-### --key-alias-pwd
-Password for defined alias inside Android keystore.
-If not defined it will be used the same of Android keystore.
-
-### --key-keystore
-### --key-mobprov
-### --key-p12
-Paths of the corresponding file to be used to create key element if it is'n found

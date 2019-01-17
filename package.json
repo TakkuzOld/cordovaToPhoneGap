@@ -15,8 +15,8 @@
     "inspect": "node --inspect-brk bin/index.js"
   },
   "dependencies": {
-    "colors": "1.3.2",
-    "fast-xml-parser": "3.12.9",
+    "colors": "1.3.3",
+    "fast-xml-parser": "3.12.12",
     "fs-extra": "7.0.1",
     "meow": "5.0.0",
     "pgb-api": "1.1.2"
