@@ -43,7 +43,12 @@ You could use your token as params instead of environment variable.
 Token could be obtained also from NPM config.
 
 i.e.: `npm config set pgToken "$yourPhonegapToken"`
-will save it in you `~/.npmrc` and you do not need to use in your command
+will save it in you `~/.npmrc` and you do not need to use in your command or you can save it in your npm package.json `config`
+```
+"config": {
+  "token": "$yourPhonegapToken"
+}
+```
 
 ### -l/--lookup
 Keeps process running after upload to look at the current status of the build for every platforms.
