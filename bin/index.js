@@ -57,7 +57,7 @@ const cli = meow(
       },
       ios: {
         name: cli.flags.keyIos,
-        password: cli.flags.keyIos
+        password: cli.flags.keyIosPwd
       }
     };
     // keys.android.alias = cli.flags.keyAlias || keys.android.alias;
