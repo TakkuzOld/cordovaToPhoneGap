@@ -50,6 +50,9 @@ will save it in you `~/.npmrc` and you do not need to use in your command or you
 }
 ```
 
+### -c/--check-version
+Before update the app on PG:B a version check is made: if the version of the uploaded is less or equals than the existing one than an exception is throwed.
+
 ### -l/--lookup
 Keeps process running after upload to look at the current status of the build for every platforms.
 

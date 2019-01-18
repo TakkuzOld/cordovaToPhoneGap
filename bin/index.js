@@ -9,17 +9,18 @@ const helpMessage =
     $ tobuild <projectFolder>
 
   Options
-    --folder, -f     Include this folder into the build;
-    --token, -t      Use a specific token to authorize in PGB;
-    --lookup, -l     Wait till all builds succeed or fail;
-    --download, -d   Download a build after it succeeds;
-    --timeout, -o    Max timeout in minutes to wait for lookup or download;
-    --path, -p       Specify a path for the downloaded build;
+    --folder, -f         Include this folder into the build;
+    --token, -t          Use a specific token to authorize in PGB;
+    --lookup, -l         Wait till all builds succeed or fail;
+    --download, -d       Download a build after it succeeds;
+    --timeout, -o        Max timeout in minutes to wait for lookup or download;
+    --path, -p           Specify a path for the downloaded build;
+    --check-version, -c  Verify that uploaded version is bigger than the one on cloud;
 
-    --key-android           Name of the Android key on PGB;
-    --key-ios               Name of the iOS key on PGB;
-    --key-android-pwd       Password for the Android key on PGB;
-    --key-ios-pwd           Password for the iOS key on PGB;
+    --key-android        Name of the Android key on PGB;
+    --key-ios            Name of the iOS key on PGB;
+    --key-android-pwd    Password for the Android key on PGB;
+    --key-ios-pwd        Password for the iOS key on PGB;
 
   Examples
     $ tobuild /path/to/project -f resources -l
@@ -39,6 +40,7 @@ const cli = meow(
       keyIos: { type: 'string' },
       keyAndroidPwd: { type: 'string' },
       keyIosPwd: { type: 'string' },
+      checkVersion: { type: 'boolean', alias: 'c'}
       // keyAlias: { type: 'string' },
       // keyAliasPwd: { type: 'string' },
       // keyKeystore: { type: 'string' },
@@ -77,7 +79,8 @@ const cli = meow(
             lookup: cli.flags.lookup,
             download: cli.flags.path || cli.flags.download,
             keys: (keys.android.name || keys.ios.name) ? keys : null,
-            timeout: cli.flags.timeout
+            timeout: cli.flags.timeout,
+            checkVersion: cli.flags.checkVersion
           }
         );
     }
