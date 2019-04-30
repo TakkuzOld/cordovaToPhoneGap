@@ -9,6 +9,8 @@ const helpMessage =
     $ tobuild <projectFolder>
 
   Options
+    --xml, -x            Load the config.xml from a different location and override the one on main folder;
+
     --folder, -f         Include this folder into the build;
     --token, -t          Use a specific token to authorize in PGB;
     --lookup, -l         Wait till all builds succeed or fail;
@@ -31,16 +33,19 @@ const cli = meow(
   helpMessage,
   {
     flags: {
+      xml: { type: 'string', alias: 'x' },
+
       folder: { type: 'string', alias: 'f' },
       token: { type: 'string', alias: 't' },
       lookup: { type: 'boolean', alias: 'l' },
       download: { type: 'boolean', alias: 'd' },
       path: { type: 'string', alias: 'p' },
+      checkVersion: { type: 'boolean', alias: 'c'},
+
       keyAndroid: { type: 'string' },
       keyIos: { type: 'string' },
       keyAndroidPwd: { type: 'string' },
       keyIosPwd: { type: 'string' },
-      checkVersion: { type: 'boolean', alias: 'c'}
       // keyAlias: { type: 'string' },
       // keyAliasPwd: { type: 'string' },
       // keyKeystore: { type: 'string' },
@@ -76,6 +81,7 @@ const cli = meow(
           cli.flags.folder,
           cli.flags.token,
           {
+            xml: cli.flags.xml,
             lookup: cli.flags.lookup,
             download: cli.flags.path || cli.flags.download,
             keys: (keys.android.name || keys.ios.name) ? keys : null,

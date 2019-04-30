@@ -32,6 +32,9 @@ The script creates a .zip file to upload to PhoneGap: Build with "config.xml" an
 
 ## Parameters:
 
+### -x/--xml
+Load the config.xml from a different location and override the one on main folder.
+
 ### -f/--folder folderName
 Indicate any other folder to be added to the uploaded file. Required if you use splash/icons external resources folder.
 Could be used more times as needed. folderName is relative to the project path.
