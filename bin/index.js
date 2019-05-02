@@ -10,6 +10,7 @@ const helpMessage =
 
   Options
     --xml, -x            Load the config.xml from a different location and override the one on main folder;
+    --resources, -x      Load resources from external folder;
 
     --folder, -f         Include this folder into the build;
     --token, -t          Use a specific token to authorize in PGB;
@@ -34,6 +35,7 @@ const cli = meow(
   {
     flags: {
       xml: { type: 'string', alias: 'x' },
+      resources: { type: 'string', alias: 'r' },
 
       folder: { type: 'string', alias: 'f' },
       token: { type: 'string', alias: 't' },
@@ -82,6 +84,7 @@ const cli = meow(
           cli.flags.token,
           {
             xml: cli.flags.xml,
+            resources: cli.flags.resources,
             lookup: cli.flags.lookup,
             download: cli.flags.path || cli.flags.download,
             keys: (keys.android.name || keys.ios.name) ? keys : null,
