@@ -11,6 +11,7 @@ const helpMessage =
   Options
     --xml, -x            Load the config.xml from a different location and override the one on main folder;
     --resources, -x      Load resources from external folder;
+    --app-version, -a        Force version of package;
 
     --folder, -f         Include this folder into the build;
     --token, -t          Use a specific token to authorize in PGB;
@@ -36,6 +37,7 @@ const cli = meow(
     flags: {
       xml: { type: 'string', alias: 'x' },
       resources: { type: 'string', alias: 'r' },
+      appVersion: { type: 'string', alias: 'a' },
 
       folder: { type: 'string', alias: 'f' },
       token: { type: 'string', alias: 't' },
@@ -85,6 +87,7 @@ const cli = meow(
           {
             xml: cli.flags.xml,
             resources: cli.flags.resources,
+            version: cli.flags.appVersion,
             lookup: cli.flags.lookup,
             download: cli.flags.path || cli.flags.download,
             keys: (keys.android.name || keys.ios.name) ? keys : null,
