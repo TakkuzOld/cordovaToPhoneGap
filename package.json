@@ -2,7 +2,7 @@
   "author": "Vittorio Giovanelli",
   "license": "MIT",
   "name": "cordova-to-phonegap-build",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Create PhoneGap Build package from Cordova project and upload it on PhoneGap Build platform",
   "bin": {
     "cdv-pgb": "bin/index.js",
